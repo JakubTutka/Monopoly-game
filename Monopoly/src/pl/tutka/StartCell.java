@@ -1,19 +1,12 @@
 package pl.tutka;
 
-public class StartCell implements Cell{
-    private final int index = 1;
+public class StartCell extends Cell{
     private int bonus = 200;
-    private CellType type = CellType.START;
+    private CellType type;
 
-
-    @Override
-    public int getIndex() {
-        return index;
-    }
-
-    @Override
-    public CellType getType() { return type; }
 
     public StartCell() {
+        super(1, CellType.START);
+
     }
 }
