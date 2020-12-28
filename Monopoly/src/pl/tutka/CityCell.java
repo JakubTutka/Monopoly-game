@@ -1,23 +1,16 @@
 package pl.tutka;
 
-public class CityCell implements Cell{
-    private int index;
+public class CityCell extends Cell{
     private String name;
     private int price;
-    private CellType type = CellType.CITY;
-
-
-    @Override
-    public int getIndex() { return index; }
+    private Nationality nationality;
 
     public int getPrice() { return price; }
 
-    @Override
-    public CellType getType() { return type; }
-
-    public CityCell(int index, String name, int price){
-        this.index = index;
+    public CityCell(int index, String name, int price, Nationality nationality){
+        super(index, CellType.CITY);
         this.name = name;
         this.price = price;
+        this.nationality = nationality;
     }
 }

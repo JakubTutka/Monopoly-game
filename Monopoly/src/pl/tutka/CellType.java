@@ -4,7 +4,7 @@ public enum CellType {
     START,
     CITY,
     CHANCE,
-    BONUS,
     JAIL,
     PARKING,
+    TRAIN,
 }
