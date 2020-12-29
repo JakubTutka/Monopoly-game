@@ -1,6 +1,6 @@
 package pl.tutka;
 
-public abstract class Cell {
+public abstract class Cell<CellType> {
     private int index;
     private CellType cellType;
 

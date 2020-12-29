@@ -1,3 +1,4 @@
+package pl.tutka;
 import java.util.Random;
 
 class Dice {

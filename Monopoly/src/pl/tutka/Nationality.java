@@ -1,12 +1,12 @@
 package pl.tutka;
 
 public enum Nationality {
-    POLSKA,
     GRECJA,
-    ANGLIA,
-    FRANCJA,
+    WLOCHY,
     HISZPANIA,
-    PORTUGALIA,
+    ANGLIA,
+    BENELUX,
+    SZWECJA,
     NIEMCY,
     AUSTRIA,
 }
