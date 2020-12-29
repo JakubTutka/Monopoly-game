@@ -1,4 +1,4 @@
-package pl.tutka;
+import Cells.*;
 import java.util.Random;
 
 class Dice {
@@ -15,9 +15,9 @@ class Dice {
     }
 
     public static void main(String[] args) {
-        Dice dobokocka = new Dice();
+        Dice cube = new Dice();
         for (int i = 0; i < 100; i++) {
-            System.out.println(dobokocka.draw());
+            System.out.println(cube.draw());
         }
     }
 

@@ -1,5 +1,3 @@
-package pl.tutka;
-
 import java.security.cert.TrustAnchor;
 import java.util.Set;
 
@@ -52,12 +50,12 @@ public class Player {
         this.colour = colour;
     }
 
-    Dice dobokocka1;
-    Dice dobokocka2;
+    Dice cube1;
+    Dice cube2;
 
-    public int drawDices(Dice dobokocka1, Dice dobokocka2) {
-        int drawed1 = dobokocka1.draw();
-        int drawed2 = dobokocka2.draw();
+    public int drawDices(Dice cube1, Dice cube2) {
+        int drawed1 = cube1.draw();
+        int drawed2 = cube2.draw();
         boolean sameValue;
         if (drawed1 == drawed2) {
             sameValue = true;
