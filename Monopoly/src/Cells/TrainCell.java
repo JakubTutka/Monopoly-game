@@ -27,17 +27,17 @@ public class TrainCell extends Cell {
 
     public void buyingCity(Player player) {
         if (isBought == false && player.getBalance() >= this.price) {
-            System.out.println("Buying property number " + getIndex());
+            System.out.println("Buying property number " + getIndex() + ": " + this.name);
             player.minusMoney(this.price);
             player.addingCity(this);
             this.isBought = true;
         }
     }
 
-    public void payingRent(Player player1, Player player2) {
-        if (player1.getBalance() >= getRent()) {
-            player1.minusMoney(getRent());
-            player2.plusMoney(getRent());
+    public void payingRent(Player owner, Player visitor) {
+        if (visitor.getBalance() >= getRent()) {
+            visitor.minusMoney(getRent());
+            owner.plusMoney(getRent());
         }
     }
 }

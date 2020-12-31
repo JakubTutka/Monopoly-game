@@ -56,6 +56,8 @@ public class Player {
         this.currentCell = currentCell;
     }
 
+    public int getCurrentCell() {return this.currentCell;}
+
     public void addingCity(Cell card) {
         cities.add(card);
     }
