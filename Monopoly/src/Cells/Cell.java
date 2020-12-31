@@ -16,4 +16,5 @@ public abstract class Cell<CellType> {
         this.index = index;
         this.cellType = cellType;
     }
+
 }

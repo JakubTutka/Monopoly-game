@@ -1,3 +1,5 @@
+package General;
+
 import Cells.*;
 import java.util.Random;
 
