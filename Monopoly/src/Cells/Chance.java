@@ -4,13 +4,13 @@ import General.Player;
 
 import java.util.Random;
 
-public class ChanceCell extends Cell{
+public class Chance extends Cell{
 
-    public ChanceCell(int index) {
+    public Chance(int index) {
         super(index, CellType.CHANCE);
     }
 
-    public void drawingChance(Player player) {
+    public void drawChance(Player player) {
         Random r = new Random();
         int option = r.nextInt(2);
         switch (option) {

@@ -2,9 +2,9 @@ package Cells;
 
 import General.Player;
 
-public class GoToJailCell extends Cell{
+public class GoToJail extends Cell{
 
-        public GoToJailCell(int index) {
+        public GoToJail(int index) {
             super(index, CellType.GOTOJAIL);
         }
 
