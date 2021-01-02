@@ -2,11 +2,11 @@ package Cells;
 
 import General.Player;
 
-public class TaxCell extends Cell{
+public class Tax extends Cell{
 
     private int tax;
 
-    public TaxCell(int index, int tax) {
+    public Tax(int index, int tax) {
         super(index, CellType.TAX);
         this.tax = tax;
     }
