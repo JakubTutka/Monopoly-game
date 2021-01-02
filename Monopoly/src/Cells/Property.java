@@ -2,7 +2,7 @@ package Cells;
 
 import General.Player;
 
-public class CityCell extends Cell{
+public class Property extends Cell{
     private int rent;
     private String name;
     private int price;
@@ -15,8 +15,8 @@ public class CityCell extends Cell{
         return this.rent;
     }
 
-    public CityCell(int index, String name, int price, int rent, Nationality nationality){
-        super(index, CellType.CITY);
+    public Property(int index, CellType cellType, String name, int price, int rent, Nationality nationality){
+        super(index, cellType);
         this.rent = rent;
         this.name = name;
         this.price = price;
@@ -24,7 +24,7 @@ public class CityCell extends Cell{
         this.isBought = false;
     }
 
-    public void buyingCity(Player player) {
+    public void buyCity(Player player) {
         if (isBought == false && player.getBalance() >= price) {
             System.out.println("Buying property number " + getIndex() + ": " + this.name);
             player.minusMoney(price);
@@ -33,10 +33,10 @@ public class CityCell extends Cell{
         }
     }
 
-    public void payingRent(Player owner, Player visitor) {
-        if (visitor.getBalance() >= getRent()) {
-            visitor.minusMoney(getRent());
-            owner.plusMoney(getRent());
+    public void payRent(Player player1, Player player2) {
+        if (player1.getBalance() >= getRent()) {
+            player1.minusMoney(getRent());
+            player2.plusMoney(getRent());
         }
     }
 }

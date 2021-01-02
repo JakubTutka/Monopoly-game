@@ -1,6 +1,6 @@
 package Cells;
 
-public abstract class Cell<CellType> {
+public abstract class Cell{
     private int index;
     private CellType cellType;
 

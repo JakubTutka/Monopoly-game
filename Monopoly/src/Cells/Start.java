@@ -2,11 +2,10 @@ package Cells;
 
 import General.*;
 
-public class StartCell extends Cell{
+public class Start extends Cell{
     private final int bonus = 400;
-    private CellType type;
 
-    public StartCell() {
+    public Start() {
         super(1, CellType.START);
     }
 
