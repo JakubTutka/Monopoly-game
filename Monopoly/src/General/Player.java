@@ -12,7 +12,7 @@ public class Player {
     private int balance;
     private boolean inPrison;
     private int currentCell;
-    private Set<Cell> cities;
+    private Set cities;
     private String colour;
     private HashMap<Nationality, Integer> nationalityCounter = new HashMap<Nationality, Integer>();
 
