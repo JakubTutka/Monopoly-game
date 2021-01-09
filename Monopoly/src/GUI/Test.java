@@ -1,6 +1,8 @@
 package GUI;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -20,15 +22,11 @@ public class Test extends Application {
 
         primaryStage.setTitle("Title");
 
-        button = new Button();
-        button.setText("click");
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button);
+        Scene scene = new Scene(root);
 
-        Scene scene = new Scene(layout, 300, 250);
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 }
