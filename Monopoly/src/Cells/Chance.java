@@ -27,10 +27,16 @@ public class Chance extends Cell{
                 }
                 break;
             case 1 :
-                int lotteryIndexCell = 1 + r.nextInt(40);
-                System.out.println("Going to " + lotteryIndexCell + " cell");
-                player.setCurrentCell(lotteryIndexCell);
-
+                int lotteryIndexCell = 1 + r.nextInt(7);
+                int lotterySign = r.nextInt(2);
+                if (lotterySign == 0) {
+                    System.out.println("Moving back " + lotteryIndexCell + " cells");
+                    player.setCurrentCell(player.getCurrentCell() - lotteryIndexCell);
+                }
+                else {
+                    System.out.println("Moving forward " + lotteryIndexCell + " cells");
+                    player.setCurrentCell(player.getCurrentCell() + lotteryIndexCell);
+                }
         }
     }
 }

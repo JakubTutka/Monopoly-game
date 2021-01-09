@@ -6,7 +6,7 @@ public class Start extends Cell{
     private final int bonus = 400;
 
     public Start() {
-        super(1, CellType.START);
+        super(0, CellType.START);
     }
 
     public void addMoney(Player player) {

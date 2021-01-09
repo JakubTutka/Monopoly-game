@@ -9,4 +9,5 @@ public enum Nationality {
     SZWECJA,
     NIEMCY,
     AUSTRIA,
+    KOLEJE,
 }
