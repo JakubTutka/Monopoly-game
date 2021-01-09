@@ -22,11 +22,12 @@ public class Test extends Application {
 
         primaryStage.setTitle("Title");
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("board.fxml"));
 
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }
