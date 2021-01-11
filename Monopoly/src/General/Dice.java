@@ -16,11 +16,4 @@ class Dice {
         return currentValue;
     }
 
-    public static void main(String[] args) {
-        Dice cube = new Dice();
-        for (int i = 0; i < 100; i++) {
-            System.out.println(cube.draw());
-        }
-    }
-
 }
