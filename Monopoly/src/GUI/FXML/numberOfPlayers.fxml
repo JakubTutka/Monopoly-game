@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="560.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.MainController">
+   <children>
+      <Label layoutX="101.0" layoutY="111.0" text="Wybierz liczbe graczy" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <VBox alignment="TOP_CENTER" layoutX="198.0" layoutY="218.0" prefHeight="200.0" prefWidth="135.0" spacing="50.0">
+         <children>
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>
