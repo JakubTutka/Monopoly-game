@@ -36,9 +36,17 @@ public class Property extends Cell {
         if (isBought == false && player.getBalance() >= price) {
             System.out.println("Buying property number " + getIndex() + ": " + this.name);
             player.minusMoney(price);
-            player.addingCity(this);
+            player.addCity(this);
             this.isBought = true;
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void payRent(Player visitor, Player owner, Board temporarySolution) {

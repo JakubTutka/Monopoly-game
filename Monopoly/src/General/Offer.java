@@ -5,24 +5,32 @@ import Cells.Property;
 public class Offer {
 
     private int price;
+    private boolean isExchange;
     Player kupiec;
     Player sprzedajcy;
-    Property kupowane;
-    Property sprzedawane;
+    Property kartaKupca;
+    Property kartaSprzedajacego;
+
 
     public Offer(Player kupiec, Player sprzedajacy, Property property, int price) {
         this.kupiec = kupiec;
         this.sprzedajcy = sprzedajacy;
-        this.kupowane = property;
+        this.kartaKupca = property;
         this.price = price;
+        this.isExchange = false;
     }
 
-    public Offer(Player kupiec, Player sprzedajacy, Property kupowane, Property sprzedawane) {
+    public Offer(Player kupiec, Player sprzedajacy, Property kartaKupca, Property kartaSprzedajacego) {
         this.kupiec = kupiec;
         this.sprzedajcy = sprzedajacy;
-        this.kupowane = kupowane;
-        this.sprzedawane = sprzedawane;
+        this.kartaKupca = kartaKupca;
+        this.kartaSprzedajacego = kartaSprzedajacego;
+        this.isExchange = true;
     }
+
+    public boolean isExchange() { return isExchange; }
+
+    public void setExchange(boolean exchange) { isExchange = exchange; }
 
     public int getPrice() {
         return price;
@@ -49,18 +57,18 @@ public class Offer {
     }
 
     public Property getKupowane() {
-        return kupowane;
+        return kartaKupca;
     }
 
     public void setKupowane(Property kupowane) {
-        this.kupowane = kupowane;
+        this.kartaKupca = kartaKupca;
     }
 
     public Property getSprzedawane() {
-        return sprzedawane;
+        return this.kartaSprzedajacego;
     }
 
     public void setSprzedawane(Property sprzedawane) {
-        this.sprzedawane = sprzedawane;
+        this.kartaSprzedajacego = kartaSprzedajacego;
     }
 }
