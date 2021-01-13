@@ -1,4 +1,4 @@
-package GUI.Controllers;
+package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class MainController {
     void startGame(ActionEvent event) throws IOException {
         Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
-        FXMLLoader startGameLoader = new FXMLLoader(getClass().getResource("numberOfPlayers.fxml"));
+        FXMLLoader startGameLoader = new FXMLLoader(getClass().getResource("FXML/numberOfPlayers.fxml"));
         Parent startGamePane = startGameLoader.load();
         Scene scene = new Scene(startGamePane);
 
