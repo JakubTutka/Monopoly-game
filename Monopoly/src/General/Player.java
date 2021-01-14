@@ -13,7 +13,6 @@ public class Player {
     private int prisonCount;
     private int currentCell;
     private Set cities;
-    private String colour;
     private HashMap<Nationality, Integer> nationalityCounter = new HashMap<Nationality, Integer>();
     private List oferty = new LinkedList<Offer>();
 
@@ -21,10 +20,9 @@ public class Player {
     Dice cube2;
     Offer propo;
 
-    public Player(String name, int number, String colour) {
+    public Player(String name, int number) {
         this.name = name;
         this.number = number;
-        this.colour = colour;
         this.balance = 3000;
         this.currentCell = 0;
         for(Nationality l:Nationality.values()) {
@@ -70,14 +68,6 @@ public class Player {
 
     public void setCities(Set cities) {
         this.cities = cities;
-    }
-
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
     }
 
     public HashMap<Nationality, Integer> getNationalityCounter() {
@@ -206,6 +196,11 @@ public class Player {
         cities.remove(card);
         int tmp = nationalityCounter.get(card.getNationality()) - 1;
         nationalityCounter.replace(card.getNationality(), tmp);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

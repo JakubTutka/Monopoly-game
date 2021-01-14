@@ -52,6 +52,8 @@ public class NumberOfPlayersController {
 
                 Board2PlayersController board2PlayersController = startGameLoader.getController();
                 board2PlayersController.setPlayerName(player1TF.getText(), player2TF.getText());
+                board2PlayersController.makeGame();
+                board2PlayersController.setStage(stageTheEventSourceNodeBelongs);
 
                 Scene scene = new Scene(startGamePane);
 
