@@ -130,6 +130,11 @@ public class Player {
         this.balance += money;
     }
 
+    public void isBankrupt() {
+        if (this.getBalance() < 0);
+        System.out.println("Bankrut");
+    }
+
     public void trade(Player trader, Property card, Property myProperty) {
         int proposalPrice;
         Scanner scan = new Scanner(System.in);

@@ -11,6 +11,8 @@ public class Property extends Cell {
     private Nationality nationality;
     private boolean isBought;
 
+    Player owner;
+
     public int getPrice() {
         return this.price;
     }
@@ -38,6 +40,7 @@ public class Property extends Cell {
             player.minusMoney(price);
             player.addCity(this);
             this.isBought = true;
+            owner = player;
         }
     }
 

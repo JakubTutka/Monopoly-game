@@ -6,7 +6,6 @@ public enum CellType {
     CHANCE,
     JAIL,
     PARKING,
-    TRAIN,
     GOTOJAIL,
     TAX,
 }
