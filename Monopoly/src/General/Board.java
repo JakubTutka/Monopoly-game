@@ -23,6 +23,10 @@ public class Board {
 
     }
 
+    public List<Cell> getBoardCells() {
+        return boardCells;
+    }
+
     public Board() {
 
         // czy powinniśmy zrobić najpierw obiekty np Property saloniki i potem Property saloniki = new Property(XYZ) żeby móc się do tych obiektów jakoś odwoływać?

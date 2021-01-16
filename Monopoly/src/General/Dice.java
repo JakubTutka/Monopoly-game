@@ -3,7 +3,7 @@ package General;
 import Cells.*;
 import java.util.Random;
 
-class Dice {
+public class Dice {
     private int currentValue;
 
     public int draw() {
@@ -14,13 +14,6 @@ class Dice {
 
     public int getCurrentValue() {
         return currentValue;
-    }
-
-    public static void main(String[] args) {
-        Dice cube = new Dice();
-        for (int i = 0; i < 100; i++) {
-            System.out.println(cube.draw());
-        }
     }
 
 }
