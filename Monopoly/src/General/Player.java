@@ -28,9 +28,19 @@ public class Player {
         for(Nationality l:Nationality.values()) {
             nationalityCounter.put(l, 0);
         }
+
+        cube1 = new Dice();
+        cube2 = new Dice();
     }
     // getters and setters
 
+    public Dice getCube1(){
+        return cube1;
+    }
+
+    public Dice getCube2(){
+        return cube2;
+    }
     public String getName() {
         return name;
     }

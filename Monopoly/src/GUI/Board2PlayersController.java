@@ -1,16 +1,12 @@
 package GUI;
 
+import Cells.Cell;
 import Cells.Property;
 import General.*;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class Board2PlayersController extends Thread{
 
@@ -62,16 +58,90 @@ public class Board2PlayersController extends Thread{
     @FXML
     private Label ownerOfCell;
 
+    @FXML
+    private Label sum;
+
+    @FXML
+    private Label firstResult;
+
+    @FXML
+    private Label secondResult;
     Player player1;
     Player player2;
 
     Board board = new Board();
     Stage stage;
 
+    Player runningPlayer;
+
     public Board2PlayersController() throws InterruptedException {
         start();
     }
 
+    @FXML
+    public void handluj(){
+
+    }
+
+    @FXML
+    public void kup(){
+        
+    }
+
+    @FXML
+    public void rzucKostka(){
+
+        int result1 = runningPlayer.getCube1().draw();
+        int result2 = runningPlayer.getCube2().draw();
+
+        firstResult.setText("" + result1);
+        secondResult.setText("" + result2);
+
+        sum.setText("" + (result1 + result2));
+
+        if (runningPlayer.getCurrentCell() + result1 + result2 > 39){
+            runningPlayer.setCurrentCell(runningPlayer.getCurrentCell() + result1 + result2 - 40);
+            if (runningPlayer == player1){
+                player1.plusMoney(400);
+                balance1.setText("" + player1.getBalance());
+            }else{
+                player2.plusMoney(400);
+                balance2.setText("" + player2.getBalance());
+            }
+        }else{
+            runningPlayer.setCurrentCell(runningPlayer.getCurrentCell() + result1 + result2);
+        }
+
+
+        setCurrentPlayer();
+        setCurrentField();
+        setCurrentCellIndex();
+        setCurrentCellPrice();
+        setCurrentCellRent();
+        setOwnerOfCell();
+
+    }
+
+    @FXML
+    public void koniecRuchu(){
+        if (runningPlayer == player1) {
+            runningPlayer = player2;
+        }
+        else{
+            runningPlayer = player1;
+        }
+
+        setCurrentPlayer();
+        setCurrentField();
+        setCurrentCellIndex();
+        setCurrentCellPrice();
+        setCurrentCellRent();
+        setOwnerOfCell();
+    }
+
+    public Cell playerCell(Player player){
+        return board.getBoardCells().get(player.getCurrentCell());
+    }
     public void setPlayerName(String player1, String player2){
         firstPlayerName.setText(player1);
         secondPlayerName.setText(player2);
@@ -82,51 +152,75 @@ public class Board2PlayersController extends Thread{
         this.player2 = player2;
     }
 
-    public void setCurrentPlayer(Player player){
-        currentPlayer.setText(player.getName());
+    public void setRunningPlayer(Player player){
+        runningPlayer = player;
     }
 
-    public void setCurrentField(Player player){
-        currentCell.setText(board.getBoardCells().get(player.getCurrentCell()).getName());
+    public void setCurrentPlayer(){
+        currentPlayer.setText(runningPlayer.getName());
     }
 
-    public void setCurrentCellIndex(Player player){
-        currentCellIndex.setText(String.valueOf(board.getBoardCells().get(player.getCurrentCell())));
+    public void setCurrentField(){
+        currentCell.setText(playerCell(runningPlayer).getName());
     }
 
-    public void setCurrentCellPrice(Player player){
-        if(board.getBoardCells().get(player.getCurrentCell()) instanceof Property){
-            currentCellPrice.setText(String.valueOf(((Property) board.getBoardCells().get(player.getCurrentCell())).getPrice()));
+    public void setCurrentCellIndex(){
+        currentCellIndex.setText(String.valueOf(playerCell(runningPlayer).getIndex()+1));
+    }
+
+    public void setCurrentCellPrice(){
+        if(board.getBoardCells().get(runningPlayer.getCurrentCell()) instanceof Property){
+            currentCellPrice.setText(String.valueOf(((Property) playerCell(runningPlayer)).getPrice()));
         }
         else{
             currentCellPrice.setText("-");
         }
     }
 
-    public void setCurrentCellRent(Player player){
-        if(board.getBoardCells().get(player.getCurrentCell()) instanceof Property){
-            currentCellRent.setText(String.valueOf(((Property) board.getBoardCells().get(player.getCurrentCell())).getRent()));
+    public void setCurrentCellRent(){
+        if(board.getBoardCells().get(runningPlayer.getCurrentCell()) instanceof Property){
+            currentCellRent.setText(String.valueOf(((Property) playerCell(runningPlayer)).getRent()));
         }
         else{
             currentCellRent.setText("-");
         }
     }
 
-    public void setOwnerOfCell(Player player){
-        if (player == player1){
-            if(player2.getCities().contains(board.getBoardCells().get(player.getCurrentCell()))){
-                ownerOfCell.setText(player2.getName());
+    public void setOwnerOfCell(){
+        if (runningPlayer == player1){
+            if (player2.getCities() != null){
+                if(player2.getCities().contains(playerCell(runningPlayer))){
+                    ownerOfCell.setText(player2.getName());
+                }
             }
-            else if(player.getCities().contains(board.getBoardCells().get(player.getCurrentCell()))){
-                ownerOfCell.setText(player.getName());
+            if (runningPlayer.getCities() != null){
+                if(runningPlayer.getCities().contains(playerCell(runningPlayer))){
+                    ownerOfCell.setText(runningPlayer.getName());
+                }
+                else{
+                    ownerOfCell.setText("-");
+                }
+            }
+            else{
+                ownerOfCell.setText("-");
             }
         }
         else{
-            if(player1.getCities().contains(board.getBoardCells().get(player.getCurrentCell()))){
-                ownerOfCell.setText(player2.getName());
+            if (player1.getCities() != null){
+                if(player2.getCities().contains(playerCell(runningPlayer))){
+                    ownerOfCell.setText(player2.getName());
+                }
             }
-            else if(player.getCities().contains(board.getBoardCells().get(player.getCurrentCell()))){
-                ownerOfCell.setText(player.getName());
+            if (runningPlayer.getCities() != null){
+                if(runningPlayer.getCities().contains(playerCell(runningPlayer))){
+                    ownerOfCell.setText(runningPlayer.getName());
+                }
+                else{
+                    ownerOfCell.setText("-");
+                }
+            }
+            else{
+                ownerOfCell.setText("-");
             }
         }
     }
@@ -137,9 +231,27 @@ public class Board2PlayersController extends Thread{
 
     public void run(){
         while(true){
-            if(player1 != null && player2 != null){
-
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            while(player1 != null && player2 != null && runningPlayer != null){
+                refreshPlayerAtribiutes();
             }
         }
+    }
+
+    private void refreshPlayerAtribiutes() {
+
+
+            balance1.setText("" + player1.getBalance());
+            currentCell1.setText("" + (player1.getCurrentCell() + 1));
+            inPrison1.setText("" + player1.isInPrison());
+
+            balance2.setText("" + player2.getBalance());
+            currentCell2.setText("" + (player2.getCurrentCell() + 1));
+            inPrison2.setText("" + player2.isInPrison());
+
     }
 }

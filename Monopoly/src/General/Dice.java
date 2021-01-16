@@ -3,7 +3,7 @@ package General;
 import Cells.*;
 import java.util.Random;
 
-class Dice {
+public class Dice {
     private int currentValue;
 
     public int draw() {
