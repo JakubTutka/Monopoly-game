@@ -98,6 +98,37 @@ public class Board2PlayersController extends Thread{
         if(board.getBoardCells().get(player.getCurrentCell()) instanceof Property){
             currentCellPrice.setText(String.valueOf(((Property) board.getBoardCells().get(player.getCurrentCell())).getPrice()));
         }
+        else{
+            currentCellPrice.setText("-");
+        }
+    }
+
+    public void setCurrentCellRent(Player player){
+        if(board.getBoardCells().get(player.getCurrentCell()) instanceof Property){
+            currentCellRent.setText(String.valueOf(((Property) board.getBoardCells().get(player.getCurrentCell())).getRent()));
+        }
+        else{
+            currentCellRent.setText("-");
+        }
+    }
+
+    public void setOwnerOfCell(Player player){
+        if (player == player1){
+            if(player2.getCities().contains(board.getBoardCells().get(player.getCurrentCell()))){
+                ownerOfCell.setText(player2.getName());
+            }
+            else if(player.getCities().contains(board.getBoardCells().get(player.getCurrentCell()))){
+                ownerOfCell.setText(player.getName());
+            }
+        }
+        else{
+            if(player1.getCities().contains(board.getBoardCells().get(player.getCurrentCell()))){
+                ownerOfCell.setText(player2.getName());
+            }
+            else if(player.getCities().contains(board.getBoardCells().get(player.getCurrentCell()))){
+                ownerOfCell.setText(player.getName());
+            }
+        }
     }
 
     public void setStage(Stage stage){

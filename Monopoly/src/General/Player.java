@@ -12,7 +12,7 @@ public class Player {
     private boolean inPrison;
     private int prisonCount;
     private int currentCell;
-    private Set cities;
+    private Set<Property> cities;
     private HashMap<Nationality, Integer> nationalityCounter = new HashMap<Nationality, Integer>();
     private List oferty = new LinkedList<Offer>();
 
