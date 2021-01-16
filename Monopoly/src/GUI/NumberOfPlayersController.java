@@ -62,6 +62,11 @@ public class NumberOfPlayersController {
 
                 board2PlayersController.setPlayers(player1, player2);
                 board2PlayersController.setCurrentPlayer(player1);
+                board2PlayersController.setCurrentField(player1);
+                board2PlayersController.setCurrentCellIndex(player1);
+                board2PlayersController.setCurrentCellPrice(player1);
+                board2PlayersController.setCurrentCellRent(player1);
+                board2PlayersController.setOwnerOfCell(player1);
 
 //                board2PlayersController.makeGame();
 //                board2PlayersController.setStage(stageTheEventSourceNodeBelongs);
