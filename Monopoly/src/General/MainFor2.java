@@ -11,17 +11,11 @@ public class MainFor2 {
     Player winner;
 
     public MainFor2(String player1Name, String player2Name){
-        player1 = new Player(player1Name,1);
-        player2 = new Player(player2Name,2);
 
-        board = new Board();
-
-        this.startGame();
     }
 
     public void startGame(){
-        player1.setCurrentCell(board.getBoardCells().get(0));
-        player2.setCurrentCell(board.getBoardCells().get(0));
+
     }
 
 }

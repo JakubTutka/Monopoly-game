@@ -1,5 +1,6 @@
 package GUI;
 
+import General.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,9 @@ public class NumberOfPlayersController {
     @FXML
     private Label wpiszImiona;
 
+    Player player1;
+    Player player2;
+
     @FXML
     void continueGame(ActionEvent event) throws IOException {
         if (nameSet()){
@@ -52,8 +56,16 @@ public class NumberOfPlayersController {
 
                 Board2PlayersController board2PlayersController = startGameLoader.getController();
                 board2PlayersController.setPlayerName(player1TF.getText(), player2TF.getText());
-                board2PlayersController.makeGame();
-                board2PlayersController.setStage(stageTheEventSourceNodeBelongs);
+
+                player1 = new Player(player1TF.getText(), 1);
+                player2 = new Player(player2TF.getText(), 2);
+
+                board2PlayersController.setPlayers(player1, player2);
+                board2PlayersController.setCurrentPlayer(player1);
+
+//                board2PlayersController.makeGame();
+//                board2PlayersController.setStage(stageTheEventSourceNodeBelongs);
+//                board2PlayersController.setCurrentPlayer(player1TF.getText());
 
                 Scene scene = new Scene(startGamePane);
 

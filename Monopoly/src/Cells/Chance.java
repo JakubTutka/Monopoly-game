@@ -7,7 +7,7 @@ import java.util.Random;
 public class Chance extends Cell{
 
     public Chance(int index) {
-        super(index, CellType.CHANCE);
+        super(index, CellType.CHANCE, "Chance");
     }
 
     public void drawChance(Player player) {

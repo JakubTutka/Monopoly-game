@@ -1,5 +1,6 @@
 package GUI;
 
+import Cells.Property;
 import General.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Board2PlayersController implements Initializable{
+public class Board2PlayersController extends Thread{
 
     @FXML
     private Label firstPlayerName;
@@ -43,12 +44,32 @@ public class Board2PlayersController implements Initializable{
     @FXML
     private Label inPrison2;
 
-    private Stage stage;
+    @FXML
+    private Label currentPlayer;
 
-    private MainFor2 Game;
+    @FXML
+    private Label currentCell;
 
-    public Board2PlayersController() {
-        
+    @FXML
+    private Label currentCellIndex;
+
+    @FXML
+    private Label currentCellPrice;
+
+    @FXML
+    private Label currentCellRent;
+
+    @FXML
+    private Label ownerOfCell;
+
+    Player player1;
+    Player player2;
+
+    Board board = new Board();
+    Stage stage;
+
+    public Board2PlayersController() throws InterruptedException {
+        start();
     }
 
     public void setPlayerName(String player1, String player2){
@@ -56,16 +77,38 @@ public class Board2PlayersController implements Initializable{
         secondPlayerName.setText(player2);
     }
 
+    public void setPlayers(Player player1, Player player2){
+        this.player1 = player1;
+        this.player2 = player2;
+    }
+
+    public void setCurrentPlayer(Player player){
+        currentPlayer.setText(player.getName());
+    }
+
+    public void setCurrentField(Player player){
+        currentCell.setText(board.getBoardCells().get(player.getCurrentCell()).getName());
+    }
+
+    public void setCurrentCellIndex(Player player){
+        currentCellIndex.setText(String.valueOf(board.getBoardCells().get(player.getCurrentCell())));
+    }
+
+    public void setCurrentCellPrice(Player player){
+        if(board.getBoardCells().get(player.getCurrentCell()) instanceof Property){
+            currentCellPrice.setText(String.valueOf(((Property) board.getBoardCells().get(player.getCurrentCell())).getPrice()));
+        }
+    }
+
     public void setStage(Stage stage){
         this.stage = stage;
     }
 
-    public void makeGame(){
-        Game = new MainFor2(firstPlayerName.getText(), secondPlayerName.getText());
-    }
+    public void run(){
+        while(true){
+            if(player1 != null && player2 != null){
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+            }
+        }
     }
 }

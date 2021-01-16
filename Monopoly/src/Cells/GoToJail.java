@@ -5,7 +5,7 @@ import General.Player;
 public class GoToJail extends Cell{
 
         public GoToJail(int index) {
-            super(index, CellType.GOTOJAIL);
+            super(index, CellType.GOTOJAIL, "Idziesz do więzienia");
         }
 
         public void playerGoToJail(Player player) {

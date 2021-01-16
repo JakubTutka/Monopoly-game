@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class Property extends Cell {
     private int rent;
-    private String name;
     private int price;
     private Nationality nationality;
     private boolean isBought;
@@ -24,9 +23,8 @@ public class Property extends Cell {
     }
 
     public Property(int index, CellType cellType, String name, int price, int rent, Nationality nationality) {
-        super(index, cellType);
+        super(index, cellType, name);
         this.rent = rent;
-        this.name = name;
         this.price = price;
         this.nationality = nationality;
         this.isBought = false;
@@ -34,19 +32,11 @@ public class Property extends Cell {
 
     public void buyCity(Player player) {
         if (isBought == false && player.getBalance() >= price) {
-            System.out.println("Buying property number " + getIndex() + ": " + this.name);
+            System.out.println("Buying property number " + getIndex() + ": ");
             player.minusMoney(price);
             player.addCity(this);
             this.isBought = true;
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void payRent(Player visitor, Player owner, Board temporarySolution) {
