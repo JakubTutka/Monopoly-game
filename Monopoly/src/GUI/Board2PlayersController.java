@@ -3,6 +3,7 @@ package GUI;
 import Cells.Cell;
 import Cells.Property;
 import General.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -74,6 +75,7 @@ public class Board2PlayersController extends Thread{
 
     Player runningPlayer;
 
+    Thread t;
     public Board2PlayersController() throws InterruptedException {
         start();
     }
@@ -112,13 +114,10 @@ public class Board2PlayersController extends Thread{
             runningPlayer.setCurrentCell(runningPlayer.getCurrentCell() + result1 + result2);
         }
 
+        refreshPlayerAtribiutes();
 
-        setCurrentPlayer();
-        setCurrentField();
-        setCurrentCellIndex();
-        setCurrentCellPrice();
-        setCurrentCellRent();
-        setOwnerOfCell();
+
+
 
     }
 
@@ -230,28 +229,34 @@ public class Board2PlayersController extends Thread{
     }
 
     public void run(){
-        while(true){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            while(player1 != null && player2 != null && runningPlayer != null){
-                refreshPlayerAtribiutes();
-            }
-        }
+//        while(true){
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            while(player1 != null && player2 != null && runningPlayer != null){
+//                refreshPlayerAtribiutes();
+//            }
+//        }
     }
 
     private void refreshPlayerAtribiutes() {
 
+        balance1.setText("" + player1.getBalance());
+        currentCell1.setText("" + (player1.getCurrentCell() + 1));
+        inPrison1.setText("" + player1.isInPrison());
 
-            balance1.setText("" + player1.getBalance());
-            currentCell1.setText("" + (player1.getCurrentCell() + 1));
-            inPrison1.setText("" + player1.isInPrison());
+        balance2.setText("" + player2.getBalance());
+        currentCell2.setText("" + (player2.getCurrentCell() + 1));
+        inPrison2.setText("" + player2.isInPrison());
 
-            balance2.setText("" + player2.getBalance());
-            currentCell2.setText("" + (player2.getCurrentCell() + 1));
-            inPrison2.setText("" + player2.isInPrison());
+        setCurrentPlayer();
+        setCurrentField();
+        setCurrentCellIndex();
+        setCurrentCellPrice();
+        setCurrentCellRent();
+        setOwnerOfCell();
 
     }
 }
