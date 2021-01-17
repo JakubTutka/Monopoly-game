@@ -932,7 +932,7 @@
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
-                        <Button layoutX="209.0" layoutY="56.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="79.0" text="Kup">
+                        <Button layoutX="209.0" layoutY="56.0" mnemonicParsing="false" onAction="#kup" prefHeight="38.0" prefWidth="79.0" text="Kup">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
