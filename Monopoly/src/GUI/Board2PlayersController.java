@@ -7,13 +7,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.util.Properties;
+
 public class Board2PlayersController extends Thread{
 
     @FXML
     private Label firstPlayerName;
 
     @FXML
-    private ComboBox<?> properties1CB;
+    private ComboBox<Property> properties1CB;
 
     @FXML
     private Label balance1;
@@ -28,7 +30,7 @@ public class Board2PlayersController extends Thread{
     private Label secondPlayerName;
 
     @FXML
-    private ComboBox<?> properties2CB;
+    private ComboBox<Property> properties2CB;
 
     @FXML
     private Label balance2;
@@ -90,6 +92,7 @@ public class Board2PlayersController extends Thread{
             if (runningPlayer == player1) {
                 ((Property) playerCell(runningPlayer)).buyCity(player1);
                 balance1.setText("" + player1.getBalance());
+                properties1CB.getItems().addAll((Property) playerCell(runningPlayer));
             } else {
                 ((Property) playerCell(runningPlayer)).buyCity(player2);
                 balance2.setText("" + player2.getBalance());

@@ -12,7 +12,7 @@ public class Player {
     private boolean inPrison;
     private int prisonCount;
     private int currentCell;
-    private Set<Property> cities;
+    private List<Property> cities;
     private HashMap<Nationality, Integer> nationalityCounter = new HashMap<Nationality, Integer>();
     private List oferty = new LinkedList<Offer>();
     private boolean isDrawn = false;
@@ -32,72 +32,9 @@ public class Player {
 
         cube1 = new Dice();
         cube2 = new Dice();
-        cities = new Set<Property>() {
-            @Override
-            public int size() {
-                return 0;
-            }
 
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
+        cities = new ArrayList<>();
 
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<Property> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Property property) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends Property> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-        };
     }
     // getters and setters
 
@@ -149,10 +86,10 @@ public class Player {
         this.inPrison = inPrison;
     }
 
-    public Set getCities() { return cities;
+    public List<Property> getCities() { return cities;
    }
 
-    public void setCities(Set cities) {
+    public void setCities(List<Property> cities) {
         this.cities = cities;
     }
 
