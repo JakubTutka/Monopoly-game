@@ -15,6 +15,7 @@ public class Player {
     private Set<Property> cities;
     private HashMap<Nationality, Integer> nationalityCounter = new HashMap<Nationality, Integer>();
     private List oferty = new LinkedList<Offer>();
+    private boolean isDrawn = false;
 
     Dice cube1;
     Dice cube2;
@@ -31,8 +32,83 @@ public class Player {
 
         cube1 = new Dice();
         cube2 = new Dice();
+        cities = new Set<Property>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Property> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Property property) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Property> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+        };
     }
     // getters and setters
+
+
+    public boolean isDrawn() {
+        return isDrawn;
+    }
+
+    public void setDrawn(boolean drawn) {
+        isDrawn = drawn;
+    }
 
     public Dice getCube1(){
         return cube1;
@@ -123,6 +199,7 @@ public class Player {
     public int drawDices(Dice cube1, Dice cube2) {
         int drawed1 = cube1.draw();
         int drawed2 = cube2.draw();
+        isDrawn = true;
         return drawed1 + drawed2;
     }
 
@@ -137,7 +214,7 @@ public class Player {
     }
 
     public void minusMoney(int money) {
-        this.balance += money;
+        this.balance -= money;
     }
 
     public void isBankrupt() {

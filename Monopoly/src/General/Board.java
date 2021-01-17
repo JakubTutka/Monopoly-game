@@ -49,7 +49,7 @@ public class Board {
 
         // Creating TRAIN cell
 
-        boardCells.add(new Property(5, CellType.CITY, "Południowe", 400, 15, null));
+        boardCells.add(new Property(5, CellType.CITY, "Południowe", 400, 15, Nationality.KOLEJE));
 
         // Creating cities - WLOCHY and chance
 
@@ -71,7 +71,7 @@ public class Board {
 
         // Creating TRAIN cell
 
-        boardCells.add(new Property(15, CellType.CITY, "Zachodnie", 400, 50, null));
+        boardCells.add(new Property(15, CellType.CITY, "Zachodnie", 400, 50, Nationality.KOLEJE));
 
         // Creating cities - ANGLIA and chances
 
@@ -93,7 +93,7 @@ public class Board {
 
         // Creating TRAIN cell
 
-        boardCells.add(new Property(25, CellType.CITY, "Północne", 400, 50, null));
+        boardCells.add(new Property(25, CellType.CITY, "Północne", 400, 50, Nationality.KOLEJE));
 
         // Creating cities - SZWECJA and chances
 
@@ -115,7 +115,7 @@ public class Board {
 
         // Creating TRAIN cell
 
-        boardCells.add(new Property(35, CellType.CITY, "Wschodnie", 400, 50, null));
+        boardCells.add(new Property(35, CellType.CITY, "Wschodnie", 400, 50, Nationality.KOLEJE));
 
         // Creating cities - AUSTRIA and chance + tax
 
