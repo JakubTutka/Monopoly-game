@@ -59,7 +59,7 @@ public class Property extends Cell {
             player.minusMoney(price);
             player.addCity(this);
             this.isBought = true;
-            System.out.println(player.getCities());
+            System.out.println();
         }
     }
 
