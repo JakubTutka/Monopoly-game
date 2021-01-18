@@ -96,6 +96,7 @@ public class Board2PlayersController extends Thread{
             } else {
                 ((Property) playerCell(runningPlayer)).buyCity(player2);
                 balance2.setText("" + player2.getBalance());
+                properties2CB.getItems().addAll((Property) playerCell(runningPlayer));
             }
 
         }
@@ -104,7 +105,7 @@ public class Board2PlayersController extends Thread{
 
     @FXML
     public void rzucKostka(){
-        if(!runningPlayer.isDrawn()) {
+        if(!runningPlayer.isDrawn() && !runningPlayer.isInPrison()) {
             int result1 = runningPlayer.getCube1().draw();
             int result2 = runningPlayer.getCube2().draw();
 
@@ -116,17 +117,55 @@ public class Board2PlayersController extends Thread{
             if (runningPlayer.getCurrentCell() + result1 + result2 > 39) {
                 runningPlayer.setCurrentCell(runningPlayer.getCurrentCell() + result1 + result2 - 40);
                 if (runningPlayer == player1) {
-                    player1.plusMoney(400);
+                    player1.plusMoney(0);
                     balance1.setText("" + player1.getBalance());
                 } else {
-                    player2.plusMoney(400);
+                    player2.plusMoney(0);
                     balance2.setText("" + player2.getBalance());
                 }
             } else {
                 runningPlayer.setCurrentCell(runningPlayer.getCurrentCell() + result1 + result2);
             }
+
+            if (playerCell(runningPlayer) instanceof Chance) {
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (runningPlayer == player1) {
+                    ((Chance) playerCell(runningPlayer)).drawChance(player1);
+                    balance1.setText("" + player1.getBalance());
+                } else {
+                    ((Chance) playerCell(runningPlayer)).drawChance(player2);
+                    balance2.setText("" + player2.getBalance());
+                }
+            }
+
+            if (playerCell(runningPlayer) instanceof GoToJail) {
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (runningPlayer == player1) {
+                    ((GoToJail) playerCell(runningPlayer)).playerGoToJail(player1);
+                } else {
+                    ((GoToJail) playerCell(runningPlayer)).playerGoToJail(player2);
+                }
+            }
+
+            if (playerCell(runningPlayer) instanceof Tax) {
+                if (runningPlayer == player1) {
+                    ((Tax) playerCell(runningPlayer)).payTax(player1);
+                } else {
+                    ((Tax) playerCell(runningPlayer)).payTax(player2);
+                }
+            }
+
         }
         runningPlayer.setDrawn(true);
+
 
         refreshPlayerAtribiutes();
     }
@@ -136,8 +175,20 @@ public class Board2PlayersController extends Thread{
         if (runningPlayer.isDrawn()) {
             if (runningPlayer == player1) {
                 runningPlayer = player2;
+                if (runningPlayer.isInPrison()) {
+                    player2.setPrisonCount(runningPlayer.getPrisonCount()-1);
+                    if (runningPlayer.getPrisonCount() == 0) {
+                        player2.setInPrison(false);
+                    }
+                }
             } else {
                 runningPlayer = player1;
+                if (runningPlayer.isInPrison()) {
+                    player1.setPrisonCount(runningPlayer.getPrisonCount()-1);
+                    if (runningPlayer.getPrisonCount() == 0) {
+                        player1.setInPrison(false);
+                    }
+                }
             }
 
             runningPlayer.setDrawn(false);
@@ -153,6 +204,7 @@ public class Board2PlayersController extends Thread{
     public Cell playerCell(Player player){
         return board.getBoardCells().get(player.getCurrentCell());
     }
+
     public void setPlayerName(String player1, String player2){
         firstPlayerName.setText(player1);
         secondPlayerName.setText(player2);
