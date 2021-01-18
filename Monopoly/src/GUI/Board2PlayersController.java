@@ -89,16 +89,18 @@ public class Board2PlayersController extends Thread{
 
 
         if (playerCell(runningPlayer) instanceof Property) {
-            if (runningPlayer == player1) {
-                ((Property) playerCell(runningPlayer)).buyCity(player1);
-                balance1.setText("" + player1.getBalance());
-                properties1CB.getItems().addAll((Property) playerCell(runningPlayer));
-            } else {
-                ((Property) playerCell(runningPlayer)).buyCity(player2);
-                balance2.setText("" + player2.getBalance());
-                properties2CB.getItems().addAll((Property) playerCell(runningPlayer));
-            }
+            if (!((Property) playerCell(runningPlayer)).isBought()) {
+                if (runningPlayer == player1) {
+                    ((Property) playerCell(runningPlayer)).buyCity(player1);
+                    balance1.setText("" + player1.getBalance());
+                    properties1CB.getItems().addAll((Property) playerCell(runningPlayer));
+                } else {
+                    ((Property) playerCell(runningPlayer)).buyCity(player2);
+                    balance2.setText("" + player2.getBalance());
+                    properties2CB.getItems().addAll((Property) playerCell(runningPlayer));
+                }
 
+            }
         }
         refreshPlayerAtribiutes();
     }
