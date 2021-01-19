@@ -860,7 +860,7 @@
                               <Font size="32.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="properties2" layoutX="103.0" layoutY="100.0" prefHeight="25.0" prefWidth="155.0" />
+                        <ComboBox fx:id="properties2CB" layoutX="103.0" layoutY="100.0" prefHeight="25.0" prefWidth="155.0" />
                         <Label layoutX="114.0" layoutY="61.0" text="Nieruchomości">
                            <font>
                               <Font name="System Bold" size="19.0" />
