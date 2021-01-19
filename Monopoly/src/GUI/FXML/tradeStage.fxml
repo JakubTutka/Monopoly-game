@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXML.TradeStage">
+   <children>
+      <Label layoutX="80.0" layoutY="28.0" prefHeight="46.0" prefWidth="132.0" text="Kupujący:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <RadioButton layoutX="264.0" layoutY="38.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="98.0" text="Gracz 1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="396.0" layoutY="34.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" text="Gracz 2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="75.0" layoutY="154.0" prefHeight="46.0" prefWidth="160.0" text="Które miasto?">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="300.0" layoutY="165.0" prefWidth="150.0" />
+      <Button layoutX="136.0" layoutY="338.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="98.0" text="AKCEPTUJ" />
+      <Label layoutX="107.0" layoutY="224.0" prefHeight="46.0" prefWidth="78.0" text="Oferta">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField layoutX="301.0" layoutY="235.0" />
+      <Label layoutX="185.0" layoutY="97.0" prefHeight="46.0" prefWidth="184.0" text="Gracz_kupujący">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="174.0" layoutY="270.0" prefHeight="46.0" prefWidth="207.0" text="Gracz_Sprzedający">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="313.0" layoutY="338.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="98.0" text="ODRZUĆ" />
+   </children>
+</AnchorPane>

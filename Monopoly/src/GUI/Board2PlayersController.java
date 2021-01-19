@@ -89,13 +89,15 @@ public class Board2PlayersController extends Thread{
 
 
         if (playerCell(runningPlayer) instanceof Property) {
-            if (runningPlayer == player1) {
-                ((Property) playerCell(runningPlayer)).buyCity(player1);
-                balance1.setText("" + player1.getBalance());
-                properties1CB.getItems().addAll((Property) playerCell(runningPlayer));
-            } else {
-                ((Property) playerCell(runningPlayer)).buyCity(player2);
-                balance2.setText("" + player2.getBalance());
+            if(!((Property) playerCell(runningPlayer)).isBought()) {
+                if (runningPlayer == player1) {
+                    ((Property) playerCell(runningPlayer)).buyCity(player1);
+                    balance1.setText("" + player1.getBalance());
+                    properties1CB.getItems().addAll((Property) playerCell(runningPlayer));
+                } else {
+                    ((Property) playerCell(runningPlayer)).buyCity(player2);
+                    balance2.setText("" + player2.getBalance());
+                }
             }
 
         }
@@ -255,14 +257,13 @@ public class Board2PlayersController extends Thread{
 
     private void refreshPlayerAtribiutes() {
 
+        balance1.setText("" + player1.getBalance());
+        currentCell1.setText("" + (player1.getCurrentCell() + 1));
+        inPrison1.setText("" + player1.isInPrison());
 
-            balance1.setText("" + player1.getBalance());
-            currentCell1.setText("" + (player1.getCurrentCell() + 1));
-            inPrison1.setText("" + player1.isInPrison());
-
-            balance2.setText("" + player2.getBalance());
-            currentCell2.setText("" + (player2.getCurrentCell() + 1));
-            inPrison2.setText("" + player2.isInPrison());
+        balance2.setText("" + player2.getBalance());
+        currentCell2.setText("" + (player2.getCurrentCell() + 1));
+        inPrison2.setText("" + player2.isInPrison());
 
 
         setCurrentPlayer();
