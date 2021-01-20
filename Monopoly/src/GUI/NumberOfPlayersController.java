@@ -62,7 +62,7 @@ public class NumberOfPlayersController {
 
 
                 board2PlayersController.setPlayers(player1, player2);
-                board2PlayersController.setRunningPlayer(player1);
+
                 board2PlayersController.setCurrentPlayer();
                 board2PlayersController.setCurrentField();
                 board2PlayersController.setCurrentCellIndex();
@@ -76,6 +76,9 @@ public class NumberOfPlayersController {
                 Scene scene = new Scene(startGamePane);
 
                 Stage board = new Stage();
+
+                board2PlayersController.setStage(board);
+
                 board.setScene(scene);
                 board.setResizable(false);
 

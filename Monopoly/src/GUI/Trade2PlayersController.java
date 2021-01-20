@@ -7,12 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -39,6 +35,10 @@ public class Trade2PlayersController{
         player1CB = properties1CB;
         player2CB = properties2CB;
     }
+
+    @FXML
+    private AnchorPane mainAnchorPane;
+
     @FXML
     private RadioButton player1Buying;
 
@@ -64,16 +64,50 @@ public class Trade2PlayersController{
     private TextField offer;
 
     @FXML
-    private Label buyingPlayer;
+    private Label buyingPlayerTX;
 
     @FXML
-    private Label sellingPlayer;
+    private Label sellingPlayerTX;
 
     @FXML
     private Button reject;
 
+    Player buyingPlayer;
+    Player sellingPlayer;
+
     @FXML
     void acceptTrade(ActionEvent event) {
+        boolean isPriceInt = true;
+        boolean isComboEmpty = false;
+
+        try {
+            Integer.parseInt(offer.getText());
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Wprowadź poprwanie cene!");
+            alert.show();
+            isPriceInt = false;
+        }
+
+        if(citiesCB.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Nie wybrano miasta!");
+            alert.show();
+            isComboEmpty = true;
+        }
+
+        if (isPriceInt && !isComboEmpty){
+            int offerPrice = Integer.parseInt(offer.getText());
+
+            sellingPlayer.plusMoney(offerPrice);
+            buyingPlayer.minusMoney(offerPrice);
+
+            buyingPlayer.getCities().add(citiesCB.getValue());
+            sellingPlayer.getCities().remove(citiesCB.getValue());
+
+            Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stageTheEventSourceNodeBelongs.close();
+        }
 
     }
 
@@ -82,38 +116,42 @@ public class Trade2PlayersController{
 
         if(player1Buying.isSelected()){
 
+            buyingPlayer = player1;
+            sellingPlayer = player2;
+
             player1Selling.setVisible(false);
             player2Selling.setVisible(true);
 
             player2Selling.setSelected(true);
-            buyingPlayer.setText(player1.getName());
-            sellingPlayer.setText(player2.getName());
+            buyingPlayerTX.setText(buyingPlayer.getName());
+            sellingPlayerTX.setText(sellingPlayer.getName());
 
-            List<Property> exchangeCities = new ArrayList<>();
+            citiesCB.getItems().removeAll(citiesCB.getItems());
 
-            for (int i = 0; i < player2.getCities().size(); i++){
-                exchangeCities.add(player2.getCities().get(i));
+            for (int i = 0; i < sellingPlayer.getCities().size(); i++){
+                citiesCB.getItems().add(sellingPlayer.getCities().get(i));
             }
 
-            citiesCB = new ComboBox<>(FXCollections.observableArrayList(exchangeCities));
         }
         if(player2Buying.isSelected()){
+
+            buyingPlayer = player2;
+            sellingPlayer = player1;
+
             player2Selling.setVisible(false);
             player1Selling.setVisible(true);
 
             player1Selling.setSelected(true);
 
-            buyingPlayer.setText(player2.getName());
-            sellingPlayer.setText(player1.getName());
+            buyingPlayerTX.setText(buyingPlayer.getName());
+            sellingPlayerTX.setText(sellingPlayer.getName());
 
-            List<Property> exchangeCities = new ArrayList<>();
+            citiesCB.getItems().removeAll(citiesCB.getItems());
 
-            for (int i = 0; i < player1.getCities().size(); i++){
-                exchangeCities.add(player1.getCities().get(i));
+            for (int i = 0; i < sellingPlayer.getCities().size(); i++){
+                citiesCB.getItems().add(sellingPlayer.getCities().get(i));
             }
 
-            citiesCB = new ComboBox<>(FXCollections.observableArrayList(exchangeCities));
-            System.out.println("dupa");
         }
     }
 
