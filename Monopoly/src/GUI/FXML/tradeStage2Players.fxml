@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainAnchorPane" prefHeight="518.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Trade2PlayersController">
+   <children>
+      <Label layoutX="80.0" layoutY="28.0" prefHeight="46.0" prefWidth="132.0" text="Kupujący:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="player1Buying" layoutX="264.0" layoutY="38.0" mnemonicParsing="false" onAction="#radioCheck" prefHeight="27.0" prefWidth="98.0" text="Gracz 1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="players" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="player2Buying" layoutX="396.0" layoutY="34.0" mnemonicParsing="false" onAction="#radioCheck" prefHeight="36.0" prefWidth="132.0" text="Gracz 2" toggleGroup="$players">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="56.0" layoutY="220.0" prefHeight="46.0" prefWidth="200.0" text="Która posiadłość?">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="citiesCB" layoutX="307.0" layoutY="231.0" prefWidth="150.0" />
+      <Button fx:id="accept" layoutX="146.0" layoutY="417.0" mnemonicParsing="false" onAction="#acceptTrade" prefHeight="27.0" prefWidth="98.0" text="AKCEPTUJ" />
+      <Label layoutX="107.0" layoutY="283.0" prefHeight="46.0" prefWidth="78.0" text="Oferta">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="offer" layoutX="307.0" layoutY="293.0" />
+      <Button fx:id="reject" layoutX="298.0" layoutY="417.0" mnemonicParsing="false" onAction="#rejectTrade" prefHeight="27.0" prefWidth="98.0" text="ODRZUĆ" />
+      <Label layoutX="56.0" layoutY="100.0" prefHeight="46.0" prefWidth="149.0" text="Sprzedający:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="player1Selling" layoutX="264.0" layoutY="110.0" mnemonicParsing="false" onAction="#radioCheck" prefHeight="27.0" prefWidth="98.0" text="Gracz 1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="players1" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="player2Selling" layoutX="396.0" layoutY="110.0" mnemonicParsing="false" onAction="#radioCheck" prefHeight="27.0" prefWidth="132.0" text="Gracz 2" toggleGroup="$players1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </RadioButton>
+      <Label fx:id="buyingPlayerTX" layoutX="236.0" layoutY="176.0" prefHeight="36.0" prefWidth="194.0" textFill="#0000ffc2">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="sellingPlayerTX" layoutX="234.0" layoutY="349.0" prefHeight="36.0" prefWidth="194.0" textFill="#0000ffc2">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

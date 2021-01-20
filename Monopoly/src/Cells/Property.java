@@ -10,16 +10,39 @@ public class Property extends Cell {
     private Nationality nationality;
     private boolean isBought;
 
-    public int getPrice() {
-        return this.price;
-    }
+    // setters and getters
+
 
     public int getRent() {
-        return this.rent;
+        return rent;
+    }
+
+    public void setRent(int rent) {
+        this.rent = rent;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Nationality getNationality() {
-        return this.nationality;
+        return nationality;
+    }
+
+    public void setNationality(Nationality nationality) {
+        this.nationality = nationality;
+    }
+
+    public boolean isBought() {
+        return isBought;
+    }
+
+    public void setBought(boolean bought) {
+        isBought = bought;
     }
 
     public Property(int index, CellType cellType, String name, int price, int rent, Nationality nationality) {
@@ -32,7 +55,7 @@ public class Property extends Cell {
 
     public void buyCity(Player player) {
         if (isBought == false && player.getBalance() >= price) {
-            System.out.println("Buying property number " + getIndex() + ": ");
+            System.out.println("Buying property number " + (getIndex()+1) + ": " + getName());
             player.minusMoney(price);
             player.addCity(this);
             this.isBought = true;

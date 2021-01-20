@@ -23,4 +23,8 @@ public abstract class Cell{
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -12,9 +12,10 @@ public class Player {
     private boolean inPrison;
     private int prisonCount;
     private int currentCell;
-    private Set<Property> cities;
+    private List<Property> cities;
     private HashMap<Nationality, Integer> nationalityCounter = new HashMap<Nationality, Integer>();
     private List oferty = new LinkedList<Offer>();
+    private boolean isDrawn = false;
 
     Dice cube1;
     Dice cube2;
@@ -31,8 +32,20 @@ public class Player {
 
         cube1 = new Dice();
         cube2 = new Dice();
+
+        cities = new ArrayList<>();
+
     }
     // getters and setters
+
+
+    public boolean isDrawn() {
+        return isDrawn;
+    }
+
+    public void setDrawn(boolean drawn) {
+        isDrawn = drawn;
+    }
 
     public Dice getCube1(){
         return cube1;
@@ -73,10 +86,10 @@ public class Player {
         this.inPrison = inPrison;
     }
 
-    public Set getCities() { return cities;
+    public List<Property> getCities() { return cities;
    }
 
-    public void setCities(Set cities) {
+    public void setCities(List<Property> cities) {
         this.cities = cities;
     }
 
@@ -123,6 +136,7 @@ public class Player {
     public int drawDices(Dice cube1, Dice cube2) {
         int drawed1 = cube1.draw();
         int drawed2 = cube2.draw();
+        isDrawn = true;
         return drawed1 + drawed2;
     }
 
@@ -137,7 +151,12 @@ public class Player {
     }
 
     public void minusMoney(int money) {
-        this.balance += money;
+        this.balance -= money;
+    }
+
+    public void isBankrut() {
+        if (this.getBalance() < 0);
+        System.out.println("Bankrut");
     }
 
     public void trade(Player trader, Property card, Property myProperty) {
