@@ -154,7 +154,7 @@ public class Player {
         this.balance -= money;
     }
 
-    public void isBankrupt() {
+    public void isBankrut() {
         if (this.getBalance() < 0);
         System.out.println("Bankrut");
     }

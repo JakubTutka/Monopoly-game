@@ -70,9 +70,8 @@ public class NumberOfPlayersController {
                 board2PlayersController.setCurrentCellRent();
                 board2PlayersController.setOwnerOfCell();
 
-//                board2PlayersController.makeGame();
-//                board2PlayersController.setStage(stageTheEventSourceNodeBelongs);
-//                board2PlayersController.setCurrentPlayer(player1TF.getText());
+
+                board2PlayersController.setStage(stageTheEventSourceNodeBelongs);
 
                 Scene scene = new Scene(startGamePane);
 

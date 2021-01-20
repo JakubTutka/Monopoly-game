@@ -2,13 +2,17 @@ package GUI;
 
 import Cells.*;
 import General.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.util.Properties;
+import java.io.IOException;
 
 public class Board2PlayersController extends Thread{
 
@@ -81,14 +85,27 @@ public class Board2PlayersController extends Thread{
     }
 
     @FXML
-    public void handluj(){
-        FXMLLoader startGameLoader = new FXMLLoader(getClass().getResource("FXML/.fxml"));
+    public void handluj(ActionEvent event) throws IOException {
+
+        Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader startGameLoader = new FXMLLoader(getClass().getResource("FXML/tradeStage2Players.fxml"));
+        Parent startGamePane = (Parent) startGameLoader.load();
+
+        Trade2PlayersController trade2PlayersController = startGameLoader.getController();
+        trade2PlayersController.setPlayers(player1, player2, properties1CB, properties2CB);
+
+        Scene scene = new Scene(startGamePane);
+
+        Stage trade = new Stage();
+        trade.setScene(scene);
+        trade.setResizable(false);
+
+        trade.showAndWait();
+
     }
 
     @FXML
     public void kup() {
-
-
         if (playerCell(runningPlayer) instanceof Property) {
             if (!((Property) playerCell(runningPlayer)).isBought()) {
                 if (runningPlayer == player1) {
@@ -167,8 +184,6 @@ public class Board2PlayersController extends Thread{
 
         }
         runningPlayer.setDrawn(true);
-
-
         refreshPlayerAtribiutes();
     }
 
