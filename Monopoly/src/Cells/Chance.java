@@ -1,6 +1,8 @@
 package Cells;
 
+import General.Board;
 import General.Player;
+import GUI.*;
 
 import java.util.Random;
 
@@ -25,17 +27,18 @@ public class Chance extends Cell{
                     System.out.println("Winning " + lotteryCash);
                     player.plusMoney(lotteryCash);
                 }
+
                 break;
             case 1 :
                 int lotteryIndexCell = 1 + r.nextInt(7);
                 int lotterySign = r.nextInt(2);
                 if (lotterySign == 0) {
                     System.out.println("Moving back " + lotteryIndexCell + " cells");
-                    player.setCurrentCell(player.getCurrentCell() - lotteryIndexCell);
+                    player.setCurrentCell((player.getCurrentCell() - lotteryIndexCell) % 40);
                 }
                 else {
                     System.out.println("Moving forward " + lotteryIndexCell + " cells");
-                    player.setCurrentCell(player.getCurrentCell() + lotteryIndexCell);
+                    player.setCurrentCell((player.getCurrentCell() + lotteryIndexCell) % 40);
                 }
         }
     }

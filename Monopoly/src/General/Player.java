@@ -16,6 +16,7 @@ public class Player {
     private HashMap<Nationality, Integer> nationalityCounter = new HashMap<Nationality, Integer>();
     private List oferty = new LinkedList<Offer>();
     private boolean isDrawn = false;
+    private boolean drugaSzansa = false;
 
     Dice cube1;
     Dice cube2;
@@ -38,6 +39,14 @@ public class Player {
     }
     // getters and setters
 
+
+    public boolean isDrugaSzansa() {
+        return drugaSzansa;
+    }
+
+    public void setDrugaSzansa(boolean drugaSzansa) {
+        this.drugaSzansa = drugaSzansa;
+    }
 
     public boolean isDrawn() {
         return isDrawn;
