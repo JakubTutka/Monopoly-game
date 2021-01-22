@@ -180,6 +180,14 @@ public class Board2PlayersController extends Thread{
                     ((Tax) playerCell(runningPlayer)).payTax(player2);
                 }
             }
+            if (playerCell(runningPlayer) instanceof Property) {
+                if (((Property) playerCell(runningPlayer)).isBought())
+                if (runningPlayer == player1) {
+                    ((Property) playerCell(runningPlayer)).payRent(player1, ((Property) playerCell(runningPlayer)).getOwner(), board);
+                } else {
+                    ((Property) playerCell(runningPlayer)).payRent(player2, ((Property) playerCell(runningPlayer)).getOwner(), board);
+                }
+            }
 
         }
         runningPlayer.setDrawn(true);
