@@ -100,6 +100,7 @@ public class Board2PlayersController extends Thread{
         Scene scene = new Scene(startGamePane);
 
         Stage trade = new Stage();
+        trade.setTitle("Handel");
         trade.setScene(scene);
         trade.setResizable(false);
 

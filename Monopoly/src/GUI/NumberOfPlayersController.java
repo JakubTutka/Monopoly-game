@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -83,6 +84,7 @@ public class NumberOfPlayersController {
                 board.setResizable(false);
 
                 stageTheEventSourceNodeBelongs.close();
+                board.setTitle("Plansza - Monopoly");
                 board.show();
 
 
