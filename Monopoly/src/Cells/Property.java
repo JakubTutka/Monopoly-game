@@ -73,8 +73,8 @@ public class Property extends Cell {
     }
 
     public void payRent(Player visitor, Player owner, Board temporarySolution) {
+        System.out.println("Paying the rent: " + getRent() + " to: " + owner.getName());
         if (owner.getNationalityCounter().get(getNationality()) == temporarySolution.getFullNationality().get(getNationality()) && getNationality() != Nationality.KOLEJE) {
-            // ta funkcja jest na pewno do zmiany - nie wiem jak się inaczej odwołać do hashmapy która jest na planszy z liczbą pól danej narodowości nie podając jej jako argumentu
             if (visitor.getBalance() >= 2 * getRent()) {
                 visitor.minusMoney(2 * getRent());
                 owner.plusMoney(2 * getRent());

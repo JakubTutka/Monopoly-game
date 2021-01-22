@@ -151,6 +151,7 @@ public class Board2PlayersController extends Thread{
             if (runningPlayer.getCurrentCell() + result1 + result2 > 39) {
 
                 runningPlayer.setCurrentCell(runningPlayer.getCurrentCell() + result1 + result2 - 40);
+                System.out.println("Start passing bonus!");
                 if (runningPlayer == player1) {
                     player1.plusMoney(400);
                     balance1.setText("" + player1.getBalance());
