@@ -29,8 +29,6 @@ public class Board {
 
     public Board() {
 
-        // czy powinniśmy zrobić najpierw obiekty np Property saloniki i potem Property saloniki = new Property(XYZ) żeby móc się do tych obiektów jakoś odwoływać?
-
         // Creating board - designed by Tutka & Bałuszynski
 
         // Creating START cell with final index 1
