@@ -9,9 +9,18 @@ public class Property extends Cell {
     private int price;
     private Nationality nationality;
     private boolean isBought;
+    Player owner;
 
     // setters and getters
 
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
 
     public int getRent() {
         return rent;
@@ -59,6 +68,7 @@ public class Property extends Cell {
             player.minusMoney(price);
             player.addCity(this);
             this.isBought = true;
+            this.owner = player;
         }
     }
 

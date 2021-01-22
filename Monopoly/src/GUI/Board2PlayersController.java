@@ -149,12 +149,13 @@ public class Board2PlayersController extends Thread implements Initializable {
             sum.setText("" + (result1 + result2));
 
             if (runningPlayer.getCurrentCell() + result1 + result2 > 39) {
+
                 runningPlayer.setCurrentCell(runningPlayer.getCurrentCell() + result1 + result2 - 40);
                 if (runningPlayer == player1) {
-                    player1.plusMoney(0);
+                    player1.plusMoney(400);
                     balance1.setText("" + player1.getBalance());
                 } else {
-                    player2.plusMoney(0);
+                    player2.plusMoney(400);
                     balance2.setText("" + player2.getBalance());
                 }
             } else {
@@ -162,25 +163,23 @@ public class Board2PlayersController extends Thread implements Initializable {
             }
 
             if (playerCell(runningPlayer) instanceof Chance) {
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (runningPlayer == player1) {
-                    ((Chance) playerCell(runningPlayer)).drawChance(player1);
-                    balance1.setText("" + player1.getBalance());
-                } else {
-                    ((Chance) playerCell(runningPlayer)).drawChance(player2);
-                    balance2.setText("" + player2.getBalance());
-                }
+
+                int nrPola = playerCell(runningPlayer).getIndex();
+
+                do {
+
+                    if (runningPlayer == player1) {
+                        ((Chance) playerCell(runningPlayer)).drawChance(player1);
+                        balance1.setText("" + player1.getBalance());
+
+                    } else {
+                        ((Chance) playerCell(runningPlayer)).drawChance(player2);
+                        balance2.setText("" + player2.getBalance());
+                    }
+                } while (playerCell(runningPlayer) instanceof Chance && nrPola != playerCell(runningPlayer).getIndex());
             }
             if (playerCell(runningPlayer) instanceof GoToJail) {
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
                 if (runningPlayer == player1) {
                     ((GoToJail) playerCell(runningPlayer)).playerGoToJail(player1);
                 } else {
@@ -195,7 +194,17 @@ public class Board2PlayersController extends Thread implements Initializable {
                     ((Tax) playerCell(runningPlayer)).payTax(player2);
                 }
             }
+          
+            if (playerCell(runningPlayer) instanceof Property) {
+                if (((Property) playerCell(runningPlayer)).isBought())
+                if (runningPlayer == player1) {
+                    ((Property) playerCell(runningPlayer)).payRent(player1, ((Property) playerCell(runningPlayer)).getOwner(), board);
+                } else {
+                    ((Property) playerCell(runningPlayer)).payRent(player2, ((Property) playerCell(runningPlayer)).getOwner(), board);
+                }
+            }
         }
+      
         runningPlayer.setDrawn(true);
         refreshPlayerAtribiutes();
     }
@@ -290,41 +299,16 @@ public class Board2PlayersController extends Thread implements Initializable {
     }
 
     public void setOwnerOfCell(){
-        if (runningPlayer == player1){
-            if (player2.getCities() != null){
-                if(player2.getCities().contains(playerCell(runningPlayer))){
-                    ownerOfCell.setText(player2.getName());
-                }
-            }
-            if (runningPlayer.getCities() != null){
-                if(runningPlayer.getCities().contains(playerCell(runningPlayer))){
-                    ownerOfCell.setText(runningPlayer.getName());
-                }
-                else{
-                    ownerOfCell.setText("-");
-                }
+        if(playerCell(runningPlayer) instanceof Property){
+            if (((Property) playerCell(runningPlayer)).isBought()) {
+                ownerOfCell.setText(String.valueOf(((Property) playerCell(runningPlayer)).getOwner().getName()));
             }
             else{
                 ownerOfCell.setText("-");
             }
         }
         else{
-            if (player1.getCities() != null){
-                if(player2.getCities().contains(playerCell(runningPlayer))){
-                    ownerOfCell.setText(player2.getName());
-                }
-            }
-            if (runningPlayer.getCities() != null){
-                if(runningPlayer.getCities().contains(playerCell(runningPlayer))){
-                    ownerOfCell.setText(runningPlayer.getName());
-                }
-                else{
-                    ownerOfCell.setText("-");
-                }
-            }
-            else{
-                ownerOfCell.setText("-");
-            }
+            ownerOfCell.setText("-");
         }
     }
 
@@ -354,6 +338,7 @@ public class Board2PlayersController extends Thread implements Initializable {
             }
         }
     }
+
     private void refreshPlayerAtribiutes() {
 
         balance1.setText("" + player1.getBalance());
