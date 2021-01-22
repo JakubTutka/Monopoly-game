@@ -1,20 +1,27 @@
 package GUI;
 
+
 import Cells.*;
 import General.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Random;
+import java.util.ResourceBundle;
 
-public class Board2PlayersController extends Thread{
+public class Board2PlayersController extends Thread implements Initializable {
 
     @FXML
     private Label firstPlayerName;
@@ -80,10 +87,6 @@ public class Board2PlayersController extends Thread{
 
     Player runningPlayer;
 
-    public Board2PlayersController() throws InterruptedException {
-        start();
-    }
-
     @FXML
     public void handluj(ActionEvent event) throws IOException {
 
@@ -102,6 +105,18 @@ public class Board2PlayersController extends Thread{
 
         trade.showAndWait();
 
+        properties1CB.getItems().removeAll(properties1CB.getItems());
+        properties2CB.getItems().removeAll(properties2CB.getItems());
+
+        for (int i = 0; i < player1.getCities().size(); i++){
+            properties1CB.getItems().add(player1.getCities().get(i));
+        }
+
+        for (int i = 0; i < player2.getCities().size(); i++){
+            properties2CB.getItems().add(player2.getCities().get(i));
+        }
+
+        refreshPlayerAtribiutes();
     }
 
     @FXML
@@ -163,7 +178,6 @@ public class Board2PlayersController extends Thread{
                     }
                 } while (playerCell(runningPlayer) instanceof Chance && nrPola != playerCell(runningPlayer).getIndex());
             }
-
             if (playerCell(runningPlayer) instanceof GoToJail) {
 
                 if (runningPlayer == player1) {
@@ -180,6 +194,7 @@ public class Board2PlayersController extends Thread{
                     ((Tax) playerCell(runningPlayer)).payTax(player2);
                 }
             }
+          
             if (playerCell(runningPlayer) instanceof Property) {
                 if (((Property) playerCell(runningPlayer)).isBought())
                 if (runningPlayer == player1) {
@@ -188,8 +203,8 @@ public class Board2PlayersController extends Thread{
                     ((Property) playerCell(runningPlayer)).payRent(player2, ((Property) playerCell(runningPlayer)).getOwner(), board);
                 }
             }
-
         }
+      
         runningPlayer.setDrawn(true);
         refreshPlayerAtribiutes();
     }
@@ -237,6 +252,16 @@ public class Board2PlayersController extends Thread{
     public void setPlayers(Player player1, Player player2){
         this.player1 = player1;
         this.player2 = player2;
+
+        Random random = new Random();
+        boolean whoStarts = random.nextBoolean();
+
+        if(whoStarts){
+            setRunningPlayer(player1);
+        }
+        else{
+            setRunningPlayer(player2);
+        }
     }
 
     public void setRunningPlayer(Player player){
@@ -291,26 +316,26 @@ public class Board2PlayersController extends Thread{
         this.stage = stage;
     }
 
-    public void run(){
-  /*      while(true){
+    public void run() {
+        while(true){
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            while(player1 != null && player2 != null && runningPlayer != null){
-                refreshPlayerAtribiutes();
+            if (player1 != null && player2 != null) {
+                if (player1.getBalance() <= 0) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("KONIEC KURWA GRY WYGRAL " + player2.getName());
+                    alert.show();
+                    stage.close();
+                } else if (player2.getBalance() <= 0) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("CHUJ KONIEC WYGRYWA " + player1.getBalance());
+                    alert.show();
+                    stage.close();
+                }
             }
-        }   */
-    }
-
-    public void szansaDwa(Player runningPlayer) {
-        if (runningPlayer == player1) {
-            ((Chance) playerCell(runningPlayer)).drawChance(player1);
-            balance1.setText("" + player1.getBalance());
-        } else {
-            ((Chance) playerCell(runningPlayer)).drawChance(player2);
-            balance2.setText("" + player2.getBalance());
         }
     }
 
@@ -324,12 +349,40 @@ public class Board2PlayersController extends Thread{
         currentCell2.setText("" + (player2.getCurrentCell() + 1));
         inPrison2.setText("" + player2.isInPrison());
 
-
         setCurrentPlayer();
         setCurrentField();
         setCurrentCellIndex();
         setCurrentCellPrice();
         setCurrentCellRent();
         setOwnerOfCell();
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Thread startThread = new Thread() {
+            public void run(){
+                while(true){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (player1 != null && player2 != null) {
+                        if (player1.getBalance() <= 0) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText("KONIEC KURWA GRY WYGRAL " + player2.getName());
+                            alert.show();
+                            stage.close();
+                        } else if (player2.getBalance() <= 0) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText("CHUJ KONIEC WYGRYWA " + player1.getBalance());
+                            alert.show();
+                            stage.close();
+                        }
+                    }
+                }
+            }
+        };
     }
 }
