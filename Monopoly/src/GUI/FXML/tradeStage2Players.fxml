@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="518.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Trade2PlayersController">
+<AnchorPane fx:id="mainAnchorPane" prefHeight="518.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Trade2PlayersController">
    <children>
       <Label layoutX="80.0" layoutY="28.0" prefHeight="46.0" prefWidth="132.0" text="Kupujący:">
          <font>
@@ -62,12 +61,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </RadioButton>
-      <Label fx:id="buyingPlayer" layoutX="236.0" layoutY="176.0" prefHeight="36.0" prefWidth="194.0" textFill="#0000ffc2">
+      <Label fx:id="buyingPlayerTX" layoutX="236.0" layoutY="176.0" prefHeight="36.0" prefWidth="194.0" textFill="#0000ffc2">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="sellingPlayer" layoutX="234.0" layoutY="349.0" prefHeight="36.0" prefWidth="194.0" textFill="#0000ffc2">
+      <Label fx:id="sellingPlayerTX" layoutX="234.0" layoutY="349.0" prefHeight="36.0" prefWidth="194.0" textFill="#0000ffc2">
          <font>
             <Font size="25.0" />
          </font>
