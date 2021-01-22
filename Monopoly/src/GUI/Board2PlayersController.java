@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-public class Board2PlayersController extends Thread implements Initializable {
+public class Board2PlayersController extends Thread{
 
     @FXML
     private Label firstPlayerName;
@@ -90,7 +90,7 @@ public class Board2PlayersController extends Thread implements Initializable {
     @FXML
     public void handluj(ActionEvent event) throws IOException {
 
-        Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage stageTheEventSourceNodeBelongs = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader startGameLoader = new FXMLLoader(getClass().getResource("FXML/tradeStage2Players.fxml"));
         Parent startGamePane = (Parent) startGameLoader.load();
 
@@ -108,11 +108,11 @@ public class Board2PlayersController extends Thread implements Initializable {
         properties1CB.getItems().removeAll(properties1CB.getItems());
         properties2CB.getItems().removeAll(properties2CB.getItems());
 
-        for (int i = 0; i < player1.getCities().size(); i++){
+        for (int i = 0; i < player1.getCities().size(); i++) {
             properties1CB.getItems().add(player1.getCities().get(i));
         }
 
-        for (int i = 0; i < player2.getCities().size(); i++){
+        for (int i = 0; i < player2.getCities().size(); i++) {
             properties2CB.getItems().add(player2.getCities().get(i));
         }
 
@@ -138,8 +138,8 @@ public class Board2PlayersController extends Thread implements Initializable {
     }
 
     @FXML
-    public void rzucKostka(){
-        if(!runningPlayer.isDrawn() && !runningPlayer.isInPrison()) {
+    public void rzucKostka() {
+        if (!runningPlayer.isDrawn() && !runningPlayer.isInPrison()) {
             int result1 = runningPlayer.getCube1().draw();
             int result2 = runningPlayer.getCube2().draw();
 
@@ -201,12 +201,12 @@ public class Board2PlayersController extends Thread implements Initializable {
     }
 
     @FXML
-    public void koniecRuchu(){
+    public void koniecRuchu() {
         if (runningPlayer.isDrawn()) {
             if (runningPlayer == player1) {
                 runningPlayer = player2;
                 if (runningPlayer.isInPrison()) {
-                    player2.setPrisonCount(runningPlayer.getPrisonCount()-1);
+                    player2.setPrisonCount(runningPlayer.getPrisonCount() - 1);
                     if (runningPlayer.getPrisonCount() == 0) {
                         player2.setInPrison(false);
                     }
@@ -214,7 +214,7 @@ public class Board2PlayersController extends Thread implements Initializable {
             } else {
                 runningPlayer = player1;
                 if (runningPlayer.isInPrison()) {
-                    player1.setPrisonCount(runningPlayer.getPrisonCount()-1);
+                    player1.setPrisonCount(runningPlayer.getPrisonCount() - 1);
                     if (runningPlayer.getPrisonCount() == 0) {
                         player1.setInPrison(false);
                     }
@@ -228,133 +228,119 @@ public class Board2PlayersController extends Thread implements Initializable {
 
         sum.setText("-");
 
-       refreshPlayerAtribiutes();
+        refreshPlayerAtribiutes();
     }
 
-    public Cell playerCell(Player player){
+    public Cell playerCell(Player player) {
         return board.getBoardCells().get(player.getCurrentCell());
     }
 
-    public void setPlayerName(String player1, String player2){
+    public void setPlayerName(String player1, String player2) {
         firstPlayerName.setText(player1);
         secondPlayerName.setText(player2);
     }
 
-    public void setPlayers(Player player1, Player player2){
+    public void setPlayers(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
 
         Random random = new Random();
         boolean whoStarts = random.nextBoolean();
 
-        if(whoStarts){
+        if (whoStarts) {
             setRunningPlayer(player1);
-        }
-        else{
+        } else {
             setRunningPlayer(player2);
         }
     }
 
-    public void setRunningPlayer(Player player){
+    public void setRunningPlayer(Player player) {
         runningPlayer = player;
     }
 
-    public void setCurrentPlayer(){
+    public void setCurrentPlayer() {
         currentPlayer.setText(runningPlayer.getName());
     }
 
-    public void setCurrentField(){
+    public void setCurrentField() {
         currentCell.setText(playerCell(runningPlayer).getName());
     }
 
-    public void setCurrentCellIndex(){
-        currentCellIndex.setText(String.valueOf(playerCell(runningPlayer).getIndex()+1));
+    public void setCurrentCellIndex() {
+        currentCellIndex.setText(String.valueOf(playerCell(runningPlayer).getIndex() + 1));
     }
 
-    public void setCurrentCellPrice(){
-        if(playerCell(runningPlayer) instanceof Property){
+    public void setCurrentCellPrice() {
+        if (playerCell(runningPlayer) instanceof Property) {
             currentCellPrice.setText(String.valueOf(((Property) playerCell(runningPlayer)).getPrice()));
-        }
-        else{
+        } else {
             currentCellPrice.setText("-");
         }
     }
 
-    public void setCurrentCellRent(){
-        if(playerCell(runningPlayer) instanceof Property){
+    public void setCurrentCellRent() {
+        if (playerCell(runningPlayer) instanceof Property) {
             currentCellRent.setText(String.valueOf(((Property) playerCell(runningPlayer)).getRent()));
-        }
-        else{
+        } else {
             currentCellRent.setText("-");
         }
     }
 
-    public void setOwnerOfCell(){
-        if (runningPlayer == player1){
-            if (player2.getCities() != null){
-                if(player2.getCities().contains(playerCell(runningPlayer))){
+    public void setOwnerOfCell() {
+        if (runningPlayer == player1) {
+            if (player2.getCities() != null) {
+                if (player2.getCities().contains(playerCell(runningPlayer))) {
                     ownerOfCell.setText(player2.getName());
                 }
             }
-            if (runningPlayer.getCities() != null){
-                if(runningPlayer.getCities().contains(playerCell(runningPlayer))){
+            if (runningPlayer.getCities() != null) {
+                if (runningPlayer.getCities().contains(playerCell(runningPlayer))) {
                     ownerOfCell.setText(runningPlayer.getName());
-                }
-                else{
+                } else {
                     ownerOfCell.setText("-");
                 }
-            }
-            else{
+            } else {
                 ownerOfCell.setText("-");
             }
-        }
-        else{
-            if (player1.getCities() != null){
-                if(player2.getCities().contains(playerCell(runningPlayer))){
+        } else {
+            if (player1.getCities() != null) {
+                if (player2.getCities().contains(playerCell(runningPlayer))) {
                     ownerOfCell.setText(player2.getName());
                 }
             }
-            if (runningPlayer.getCities() != null){
-                if(runningPlayer.getCities().contains(playerCell(runningPlayer))){
+            if (runningPlayer.getCities() != null) {
+                if (runningPlayer.getCities().contains(playerCell(runningPlayer))) {
                     ownerOfCell.setText(runningPlayer.getName());
-                }
-                else{
+                } else {
                     ownerOfCell.setText("-");
                 }
-            }
-            else{
+            } else {
                 ownerOfCell.setText("-");
             }
         }
     }
 
-    public void setStage(Stage stage){
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void run() {
-        while(true){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (player1 != null && player2 != null) {
-                if (player1.getBalance() <= 0) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("KONIEC KURWA GRY WYGRAL " + player2.getName());
-                    alert.show();
-                    stage.close();
-                } else if (player2.getBalance() <= 0) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("CHUJ KONIEC WYGRYWA " + player1.getBalance());
-                    alert.show();
-                    stage.close();
-                }
+    public void checkGame() {
+        if (player1 != null && player2 != null) {
+            if (player1.getBalance() <= 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Koniec gry! Wygrywa  " + player2.getName());
+                alert.show();
+                stage.close();
+            } else if (player2.getBalance() <= 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Koniec gry! Wygrywa  " + player1.getName());
+                alert.show();
+                stage.close();
             }
         }
     }
-    private void refreshPlayerAtribiutes() {
+
+    private void refreshPlayerAtribiutes(){
 
         balance1.setText("" + player1.getBalance());
         currentCell1.setText("" + (player1.getCurrentCell() + 1));
@@ -370,34 +356,7 @@ public class Board2PlayersController extends Thread implements Initializable {
         setCurrentCellPrice();
         setCurrentCellRent();
         setOwnerOfCell();
+        checkGame();
 
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Thread startThread = new Thread() {
-            public void run(){
-                while(true){
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if (player1 != null && player2 != null) {
-                        if (player1.getBalance() <= 0) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("KONIEC KURWA GRY WYGRAL " + player2.getName());
-                            alert.show();
-                            stage.close();
-                        } else if (player2.getBalance() <= 0) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("CHUJ KONIEC WYGRYWA " + player1.getBalance());
-                            alert.show();
-                            stage.close();
-                        }
-                    }
-                }
-            }
-        };
     }
 }
